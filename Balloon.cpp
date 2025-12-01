@@ -6,12 +6,8 @@
 
 namespace {
 	const int gravity = 1; //重力
-	const int amplitude = 5; //振れ幅（※大きくすると幅が狭くなる）
-	const int period = 0.8f; //周期（※小さくすると、遅くなる）
-	double angles = 0; //角度
-	int move_x = GetPos().x; //移動後のX座標
-	int move_y = GetPos().y; //移動後のY座標
-
+	const int amplitude = 20; //振れ幅（※大きくすると幅が狭くなる）
+	const int period = 1.0f; //周期（※小さくすると、遅くなる）
 }
 
 Balloon::Balloon()
@@ -31,6 +27,10 @@ void Balloon::Update()
 	if (Input::IsKeyDown(KEY_INPUT_SPACE)) {
 		isJumping = true;
 	}
+
+	static double angles = 0; //角度
+	static int move_x = GetPos().x; //移動後のX座標
+	static int move_y = GetPos().y; //移動後のY座標
 
 	if (isJumping) {
 		move_x = cos(angles*period) * amplitude;
