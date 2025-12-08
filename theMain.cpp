@@ -2,6 +2,7 @@
 #include "globals.h"
 #include "input.h"
 #include "BaseChara.h"
+#include <vector>
 
 #include "Car.h"
 #include "Rocket.h"
@@ -15,6 +16,7 @@ namespace
 	int prevTime;
 
 	BaseChara* chara_array[5];
+	std::vector<BaseChara*> chara_vector;
 
 	int SKY_COLOR[3] = { 178, 237, 232 };
 	int GREEN_ZONE = 50;
@@ -49,6 +51,12 @@ void Initialize()
 	chara_array[1] = new Rocket(Vector2D(WIN_WIDTH / 2, GROUND_HEIGTH), Vector2D(1, 0), GetColor(255, 0, 0));
 	chara_array[2] = new UFO(Vector2D(40, 50), Vector2D(200, 0), GetColor(0, 255, 0));
 	chara_array[3] = new Balloon(Vector2D(WIN_WIDTH / 2, GROUND_HEIGTH), Vector2D(1, 0), GetColor(0, 0, 255));
+
+	//•Ê‰ð
+	//chara_vector.push_back(new Car(Vector2D(20, GROUND_HEIGTH), Vector2D(200.0f, 3.0f), GetColor(255, 255, 255)));
+	//chara_vector.push_back(new Rocket(Vector2D(WIN_WIDTH / 2, GROUND_HEIGTH), Vector2D(1, 0), GetColor(255, 0, 0)));
+	//chara_vector.push_back(new UFO(Vector2D(40, 50), Vector2D(200, 0), GetColor(0, 255, 0)));
+	//chara_vector.push_back(new Balloon(Vector2D(WIN_WIDTH / 2, GROUND_HEIGTH), Vector2D(1, 0), GetColor(0, 0, 255)));
 
 }
 void Update()
