@@ -10,8 +10,6 @@ public:
     ~Rocket();
     void Update() override; //オーバーライド
     void Draw() override; //オーバーライド
-
-    void LaunchRocket();
 private:
     bool isJumping = false;
 };
