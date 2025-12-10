@@ -29,12 +29,12 @@ void Balloon::Update()
 	}
 
 	static double angles = 0; //角度
-	static int move_x = GetPos().x; //移動後のX座標
-	static int move_y = GetPos().y; //移動後のY座標
 
 	if (isJumping) {
-		move_x = cos(angles*period) * amplitude;
-		SetPos(Vector2D(GetPos().x-move_x, GetPos().y-angles));
+		vel_.x = cos(angles * period) * amplitude;
+
+		pos_.x = pos_.x - vel_.x;
+		pos_.y = pos_.y - angles;
 		angles += 0.1;
 	}
 
@@ -42,9 +42,8 @@ void Balloon::Update()
 	if (GetPos().y < 0 + 10 || GetPos().y > WIN_HEIGHT || GetPos().x < 0 || GetPos().x > WIN_WIDTH) {
 		pos_.x = WIN_WIDTH / 2;
 		pos_.y = GROUND_HEIGTH;
+		vel_.x = 0;
 		vel_.y = 0;
-		move_x = GetPos().x;
-		move_y = GetPos().y;
 		angles = 0; //角度を0度に
 		isJumping = false;
 	}
