@@ -6,8 +6,8 @@
 
 namespace {
 	const int gravity = 1; //重力
-	const int amplitude = 20; //振れ幅（※大きくすると幅が狭くなる）
-	const int period = 1.0f; //周期（※小さくすると、遅くなる）
+	const int amplitude = 5; //振れ幅（※大きくすると幅が大きくなる）
+	const int period = 1.5 f; //周期（※大きくすると、早くなる）
 }
 
 Balloon::Balloon()
@@ -24,22 +24,23 @@ Balloon::~Balloon()
 
 void Balloon::Update()
 {
-	if (Input::IsKeyDown(KEY_INPUT_SPACE)) {
-		isJumping = true;
-	}
-
 	static double angles = 0; //角度
+	if (Input::IsKeyDown(KEY_INPUT_SPACE) && !isJumping) {
+		isJumping = true;
+		pos_.x = GetRand(WIN_WIDTH);
+		vel_.y = 5;
+	}
 
 	if (isJumping) {
 		vel_.x = cos(angles * period) * amplitude;
 
 		pos_.x = pos_.x - vel_.x;
-		pos_.y = pos_.y - angles;
+		pos_.y = pos_.y - vel_.y;
 		angles += 0.1;
 	}
 
 
-	if (GetPos().y < 0 + 10 || GetPos().y > WIN_HEIGHT || GetPos().x < 0 || GetPos().x > WIN_WIDTH) {
+	if (pos_.y > WIN_HEIGHT || pos_.y < 0) {
 		pos_.x = WIN_WIDTH / 2;
 		pos_.y = GROUND_HEIGTH;
 		vel_.x = 0;
@@ -51,6 +52,8 @@ void Balloon::Update()
 
 void Balloon::Draw()
 {
-	const Vector2D& pos = GetPos();
-	DrawCircle(pos.x, pos.y, 20, GetCharaColor(), true);
+	if (isJumping) {
+		DrawCircle(pos_.x, pos_.y, 20, GetCharaColor(), true);
+		DrawBox(pos_.x - 2, pos_.y + 20, pos_.x + 2, pos_.y + 60, GetColor(255, 255, 255), true);
+	}
 }
