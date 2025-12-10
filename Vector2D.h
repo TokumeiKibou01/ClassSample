@@ -7,7 +7,9 @@ public:
 	float x, y;//ƒƒ“ƒo•Ï”
 	Vector2D(float _x = 0, float _y = 0);
 	Vector2D Add(const Vector2D& _v); // this = this + _v;
+	Vector2D Subtract(const Vector2D& v_);
 	Vector2D ScalarMul(float k); // this = k * this;
+	Vector2D Zero();
 	float Distance(const Vector2D& _v); //this‚Æ_v‚Ì‹——£
 };
 
