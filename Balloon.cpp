@@ -7,7 +7,7 @@
 namespace {
 	const int gravity = 1; //重力
 	const int amplitude = 5; //振れ幅（※大きくすると幅が大きくなる）
-	const int period = 1.5 f; //周期（※大きくすると、早くなる）
+	const int period = 1.2f; //周期（※大きくすると、早くなる）
 }
 
 Balloon::Balloon()
@@ -15,7 +15,7 @@ Balloon::Balloon()
 }
 
 Balloon::Balloon(const Vector2D& pos, const Vector2D& vel, unsigned int color)
- : BaseChara(pos, vel, color, SHAPE::CIRLCE){
+ : BaseChara(pos, vel, color, SHAPE::CIRLCE), angles(0){
 }
 
 Balloon::~Balloon()
@@ -24,7 +24,6 @@ Balloon::~Balloon()
 
 void Balloon::Update()
 {
-	static double angles = 0; //角度
 	if (Input::IsKeyDown(KEY_INPUT_SPACE) && !isJumping) {
 		isJumping = true;
 		pos_.x = GetRand(WIN_WIDTH);

@@ -5,6 +5,7 @@ class Balloon :
 {
 private:
     bool isJumping = false;
+    float angles;
 public:
     Balloon();
     Balloon(const Vector2D& pos, const Vector2D& vel,
@@ -12,7 +13,5 @@ public:
     ~Balloon();
     void Update() override; //オーバーライド
     void Draw() override; //オーバーライド
-
-    void LaunchBallon();
 };
 

@@ -15,7 +15,7 @@ namespace
 	int crrTime;
 	int prevTime;
 
-	BaseChara* chara_array[5];
+	//BaseChara* chara_array[5];
 	std::vector<BaseChara*> chara_vector;
 
 	int SKY_COLOR[3] = { 178, 237, 232 };
@@ -47,34 +47,44 @@ void DxInit()
 void Initialize()
 {
 	// èâä˙âªèàóù
-	chara_array[0] = new Car(Vector2D(20, GROUND_HEIGTH), Vector2D(200.0f, 3.0f), GetColor(255, 255, 255));
-	chara_array[1] = new Rocket(Vector2D(WIN_WIDTH / 2, GROUND_HEIGTH), Vector2D(1, 0), GetColor(255, 0, 0));
-	chara_array[2] = new UFO(Vector2D(40, 50), Vector2D(200, 0), GetColor(0, 255, 0));
-	chara_array[3] = new Balloon(Vector2D(WIN_WIDTH / 2, GROUND_HEIGTH), Vector2D(1, 0), GetColor(0, 0, 255));
+	//chara_vector[0] = new Car(Vector2D(20, GROUND_HEIGTH), Vector2D(200.0f, 3.0f), GetColor(255, 255, 255));
+	//chara_vector[1] = new Rocket(Vector2D(WIN_WIDTH / 2, GROUND_HEIGTH), Vector2D(1, 0), GetColor(255, 0, 0));
+	//chara_vector[2] = new UFO(Vector2D(40, 50), Vector2D(200, 0), GetColor(0, 255, 0));
+	//chara_vector[3] = new Balloon(Vector2D(WIN_WIDTH / 2, GROUND_HEIGTH), Vector2D(1, 0), GetColor(0, 0, 255));
 
-	//ï â
-	//chara_vector.push_back(new Car(Vector2D(20, GROUND_HEIGTH), Vector2D(200.0f, 3.0f), GetColor(255, 255, 255)));
-	//chara_vector.push_back(new Rocket(Vector2D(WIN_WIDTH / 2, GROUND_HEIGTH), Vector2D(1, 0), GetColor(255, 0, 0)));
-	//chara_vector.push_back(new UFO(Vector2D(40, 50), Vector2D(200, 0), GetColor(0, 255, 0)));
-	//chara_vector.push_back(new Balloon(Vector2D(WIN_WIDTH / 2, GROUND_HEIGTH), Vector2D(1, 0), GetColor(0, 0, 255)));
+	chara_vector.push_back(new Car(Vector2D(20, GROUND_HEIGTH), Vector2D(200.0f, 3.0f), GetColor(255, 255, 255)));
+	chara_vector.push_back(new Rocket(Vector2D(WIN_WIDTH / 2, GROUND_HEIGTH), Vector2D(1, 0), GetColor(255, 0, 0)));
+	chara_vector.push_back(new UFO(Vector2D(40, 50), Vector2D(200, 0), GetColor(0, 255, 0)));
+	chara_vector.push_back(new Balloon(Vector2D(WIN_WIDTH / 2, GROUND_HEIGTH), Vector2D(1, 0), GetColor(0, 0, 255)));
 
 }
 void Update()
 {
 	// çXêVèàóù
-	for (int n = 0; n < 4; n++) {
-		BaseChara* chara = chara_array[n];
+	for (BaseChara* chara : chara_vector) {
 		chara->Update();
+	}
+
+	if (Input::IsKeyDown(KEY_INPUT_B)) {
+		chara_vector.push_back(new Balloon(Vector2D(WIN_WIDTH / 2, GROUND_HEIGTH), Vector2D(1, 0), GetColor(0, 0, 255)));
+	}
+
+	if (Input::IsKeyDown(KEY_INPUT_C)) {
+		if (!chara_vector.empty()) {
+			for (BaseChara* chara : chara_vector) {
+				delete chara;
+			}
+			chara_vector.clear();
+		}
 	}
 }
 
 void Draw()
 {
-	Vector2D vec = chara_array[0]->GetVel();
-	DrawFormatString(20, 20, GetColor(0,0,0), "vec: (%f, %f)", chara_array[0]->GetVel().x, chara_array[0]->GetVel().y);
+	//Vector2D vec = chara_vector[0]->GetVel();
+	//DrawFormatString(20, 20, GetColor(0,0,0), "vec: (%f, %f)", chara_vector[0]->GetVel().x, chara_vector[0]->GetVel().y);
 	// ï`âÊèàóù
-	for (int n = 0; n < 4; n++) {
-		BaseChara* chara = chara_array[n];
+	for (BaseChara* chara : chara_vector) {
 		chara->Draw();
 	}
 }
